@@ -13,22 +13,17 @@ path_start = ''  # поддиректория откуда программа б
 
 images = listdir(path_start)
 images_end = listdir(path_end)
-start_time = time()
 
 
 def difference_images(img1, img2):
-
     image_1, image_2 = (average_hash(Image.open(f'{path_start}{img1}')),
                         average_hash(Image.open(f'{path_start}{img2}')))
-
-    if image_1 == image_2:
-        return True
-    else:
-        return False
+    return True if image_1 == image_2 else False
 
 
 def sort(images_s):
     unique_images, duplicate_images, count = set(), [], 0
+    start_time = time()
     for image in images_s:
         count += 1
         print(f'Progress: {count} of {len(images_s)}')
