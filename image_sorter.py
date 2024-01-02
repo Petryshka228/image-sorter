@@ -92,11 +92,13 @@ def os_manager(path_start_1, path_end_1, img, key=False):
 
 if __name__ == '__main__':
     try:
-        os_manager(path_start, path_end, images, False)
+        key = False
+        os_manager(path_start, path_end, images, key)
         '''
         key=False если в поддиректории куда сохраняются результаты работы программы (path_end) нет файлов
         key=True если в обеих поддиректориях есть файлы
         '''
-        to_del(path_all, path_start, images)
+        if not key:
+            to_del(path_all, path_start, images)
     except IndexError:
         print('Ошибка, нет данных на входе')
