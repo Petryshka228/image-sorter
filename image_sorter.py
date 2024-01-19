@@ -61,14 +61,11 @@ def to_del(path, path_start_0, images_to_del):
     if len(images_to_del) == 0:
         print('Для программы утилизации нет данных на входе')
         return 0
-    for i in images_to_del:
-        try:
+    else:
+        for i in images_to_del:
             move(path_start_0 + i, path + '\\to_del')
-        except:
-            rename(path_start_0 + i, path_start_0 + '_' + i)
-            move(path_start_0 + '_' + i, path + '\\to_del')
-        print(f'[+] Файл " {i} " был определён как копия')
-
+            print(f'[+] Файл " {i} " был определён как копия')
+            
 
 def os_manager(path_start_1, path_end_1, img, key=False):
     if key:
