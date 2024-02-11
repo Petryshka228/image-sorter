@@ -8,7 +8,7 @@ from time import time
 YOU MUST SPECIFY THE MAIN DIRECTORY AND TWO SUBDIRECTORIES FOR THE PROGRAM TO WORK
 '''
 
-path_all = ''  # the main directory, for example C:\\python\\project_F
+path_all = ''  # the main directory, for example C:\\python\\image_sorter
 path_end = ''  # the subdirectory where the results of the program are saved, for example C:\\python\\image_sorter\\end_dir\\
 path_start = ''  # the subdirectory from where the program takes the source data, for example C:\\python\\image_sorter\\start_dir\\
 
