@@ -5,12 +5,12 @@ from imagehash import average_hash
 from time import time
 
 '''
-НЕОБХОДИМО УКАЗАТЬ ОСНОВНУЮ ДИРЕКТОРИЮ И ДВЕ ПОДДИРЕКТОРИИ ДЛЯ РАБОТЫ ПРОГРАММЫ
+YOU MUST SPECIFY THE MAIN DIRECTORY AND TWO SUBDIRECTORIES FOR THE PROGRAM TO WORK
 '''
 
-path_all = ''  # основная директория, например C:\\python\\project_F
-path_end = ''  # поддиректория куда сохраняются результаты работы программы, например C:\\python\\project_F\\end_F\\
-path_start = ''  # поддиректория откуда программа берет исходные данные, например C:\\python\\project_F\\start_F\\
+path_all = ''  # the main directory, for example C:\\python\\project_F
+path_end = ''  # the subdirectory where the results of the program are saved, for example C:\\python\\image_sorter\\end_dir\\
+path_start = ''  # the subdirectory from where the program takes the source data, for example C:\\python\\image_sorter\\start_dir\\
 
 images = listdir(path_start)
 images_end = listdir(path_end)
@@ -55,34 +55,34 @@ def renaming_file(path, fix=False):
 
 def to_del(path, path_start_0, images_to_del):
     try:
-        mkdir(path + '\\to_del')  # создается поддиректория куда будут перемещены повторяющиеся изображения
+        mkdir(path + '\\to_del')  # a subdirectory is created where duplicate images will be moved
     except FileExistsError:
         pass
 
     if len(images_to_del) == 0:
-        print('Для программы утилизации нет данных на входе')
+        print('There is no input data for the recycling program')
         return 0
     else:
         for i in images_to_del:
             move(path_start_0 + i, path + '\\to_del')
-            print(f'[+] Файл " {i} " был определён как копия')
+            print(f'[+] Файл " {i} " was identified as a copy')
             
 
 def os_manager(path_start_1, path_end_1, img, key=False):
     if key:
         for i in images_end:
             move(path_end_1 + i, path_start_1)
-        print('[+] Завершена первая часть работы программы\n'
-              'Запустите программу повторно изменив параметр " key " функции " os_manager "')
+        print('[+] The first part of the program has been completed\n'
+              'Run the program again by changing the " key" parameter of the " os_manager" function')
         return True
 
     clean_list_f = sort(img)[0]
 
-    print(f'[+] Выполняется функция менеджмента файлов ....')
+    print(f'[+] The file management function is running ....')
 
     for i in clean_list_f:
         move(path_start_1 + i, path_end_1)
-        print(f'[+] Файл " {i} " был определён как уникальный')
+        print(f'[+] Файл " {i} " was defined as unique')
 
     renaming_file(path_end_1)
     renaming_file(path_end_1, True)
@@ -93,10 +93,10 @@ if __name__ == '__main__':
         key = False
         os_manager(path_start, path_end, images, key)
         '''
-        key=False если в поддиректории куда сохраняются результаты работы программы (path_end) нет файлов
-        key=True если в обеих поддиректориях есть файлы
+        key=False  if there are no files in the subdirectory where the results of the program are saved (path_end)
+        key=True  if there are files in both subdirectories
         '''
         if not key:
             to_del(path_all, path_start, images)
     except IndexError:
-        print('Ошибка, нет данных на входе')
+        print('Error, there is no input data')
