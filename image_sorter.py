@@ -43,8 +43,8 @@ def renaming_file(path, fix=False):
     images_r = listdir(path)
     if fix:
         for i in images_r:
-            if i[5:6] == '_':
-                rename(path_end + i, path_end + f'{i[0:5]}.jpg')
+            if i[-5] == '_':
+                rename(path + i, path + f'{i[0:-5]}.jpg')
     else:
         for i in images_r:
             try:
