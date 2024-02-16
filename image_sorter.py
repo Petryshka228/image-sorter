@@ -31,11 +31,8 @@ def sort(images_s):
         print("--- %s seconds ---" % (time() - start_time))
         is_duplicate = any(difference_images(image, unique_image) for unique_image in unique_images)
 
-        if is_duplicate:
-            duplicate_images.append(image)
-        else:
-            unique_images.add(image)
-
+        duplicate_images.append(image) if is_duplicate else unique_images.add(image)
+            
     return list(unique_images), duplicate_images
 
 
