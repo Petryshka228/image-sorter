@@ -41,28 +41,40 @@ def renaming_file(path, fix=False):
     if fix:
         for i in images_r:
             if i[-5] == '_':
-                rename(path + i, path + f'{i[0:-5]}.jpg')
+                try:
+                    rename(path + i, path + f'{i[0:-5]}.jpg')
+                except FileNotFoundError:
+                    pass
     else:
         for i in images_r:
             try:
-                rename(path + i, path + f'art_{images_r.index(i)}.jpg')
+                try:
+                    rename(path + i, path + f'art_{images_r.index(i)}.jpg')
+                except FileNotFoundError:
+                    pass
             except FileExistsError:
-                rename(path + i, path + f'art_{images_r.index(i)}_.jpg')
+                try:
+                    rename(path + i, path + f'art_{images_r.index(i)}_.jpg')
+                except FileNotFoundError:
+                    pass
 
 
 def to_del(path, path_start_0, images_to_del):
     try:
-        mkdir(path + '\\to_del')  # a subdirectory is created where duplicate images will be moved
+        mkdir(path + '\\to_del')  # создается поддиректория куда будут перемещены повторяющиеся изображения
     except FileExistsError:
         pass
 
     if len(images_to_del) == 0:
-        print('There is no input data for the recycling program')
+        print('Для программы утилизации нет данных на входе')
         return 0
     else:
         for i in images_to_del:
-            move(path_start_0 + i, path + '\\to_del')
-            print(f'[+] Файл " {i} " was identified as a copy')
+            try:
+                move(path_start_0 + i, path + '\\to_del')
+            except FileNotFoundError:
+                pass
+            print(f'[+] Файл " {i} " был определён как копия')
             
 
 def os_manager(path_start_1, path_end_1, img, key=False):
